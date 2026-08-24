@@ -4,6 +4,8 @@ A private, locally hosted (fully vibe-coded) news dashboard that brings RSS feed
 
 This repository is intended as a portfolio project. It is not a hosted product and does not collect telemetry.
 
+![Dashboard screenshot](docs/images/dashboard-screenshot.png)
+
 ## Features
 
 - Aggregates configurable global, Malaysian, technology, and AI RSS feeds.
@@ -23,7 +25,7 @@ cp .env.example .env
 uv run python run.py
 ```
 
-Add `OPENAI_API_KEY` to `.env` to enable the News Assistant. The dashboard is available at http://127.0.0.1:5000.
+Add `OPENAI_API_KEY` to `.env` to enable the News Assistant. The dashboard runs locally on your machine after you start the application.
 
 ## Gmail setup
 
