@@ -1,0 +1,65 @@
+# ─────────────────────────────────────────────
+#  Ram's News Portal — configuration
+# ─────────────────────────────────────────────
+
+# Refresh times (24h, Europe/Amsterdam timezone)
+refresh_times:
+  - "07:00"
+  - "12:00"
+  - "18:00"
+
+# Items shown per section in the dashboard
+max_items_per_section: 10
+
+# ── RSS feeds ────────────────────────────────
+feeds:
+  global:
+    - name: "The Guardian World"
+      url: "https://www.theguardian.com/world/rss"
+    - name: "BBC World"
+      url: "https://feeds.bbci.co.uk/news/world/rss.xml"
+    - name: "Al Jazeera"
+      url: "https://www.aljazeera.com/xml/rss/all.xml"
+
+  tech:
+    - name: "The Verge"
+      url: "https://www.theverge.com/rss/index.xml"
+    - name: "Ars Technica"
+      url: "https://feeds.arstechnica.com/arstechnica/index"
+    - name: "TechCrunch"
+      url: "https://techcrunch.com/feed/"
+
+  ai:
+    - name: "MIT Tech Review AI"
+      url: "https://www.technologyreview.com/feed/"
+    - name: "VentureBeat AI"
+      url: "https://venturebeat.com/category/ai/feed/"
+    - name: "Google AI"
+      url: "https://blog.google/technology/ai/rss/"
+
+  malaysia:
+    - name: "Free Malaysia Today"
+      url: "https://www.freemalaysiatoday.com/feed/"
+    - name: "NST Online"
+      url: "https://www.nst.com.my/feed"
+
+# ── Nitter (Twitter/X) ───────────────────────
+nitter:
+  # Public instance — swap for self-hosted if available
+  base_url: "https://nitter.privacydev.net"
+  accounts:
+    - "AndrewYNg"
+    - "GoogleDeepMind"
+    - "karpathy"
+
+# ── Gmail ─────────────────────────────────────
+gmail:
+  credentials_file: "credentials.json"
+  token_file: "token.json"
+  sender_filter: "news@daily.therundown.ai"
+
+# ── Flask ─────────────────────────────────────
+server:
+  port: 5000
+  # Keep debug disabled by default. Enable it temporarily while developing.
+  debug: false

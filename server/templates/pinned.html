@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinned — Ram's News Portal</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0d0d0f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0d0d0f;
+      --surface-2:    #1c1c21;
+      --border:       #26262e;
+      --border-light: #32323c;
+      --text:         #e8e8ec;
+      --text-muted:   #888896;
+      --text-dim:     #55555f;
+      --accent:       #e8c840;
+      --accent-dim:   #c9ab2a;
+      --red:          #e85040;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+
+    html { font-size: 15px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 3rem 1.5rem;
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+    }
+
+    .back-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .page-title span { color: var(--accent); }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 3rem;
+    }
+
+    .card {
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.4s ease forwards;
+    }
+
+    .card:last-child { border-bottom: none; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card:nth-child(1)  { animation-delay: 0.03s; }
+    .card:nth-child(2)  { animation-delay: 0.06s; }
+    .card:nth-child(3)  { animation-delay: 0.09s; }
+    .card:nth-child(4)  { animation-delay: 0.12s; }
+    .card:nth-child(5)  { animation-delay: 0.15s; }
+    .card:nth-child(6)  { animation-delay: 0.18s; }
+    .card:nth-child(7)  { animation-delay: 0.21s; }
+    .card:nth-child(8)  { animation-delay: 0.24s; }
+    .card:nth-child(9)  { animation-delay: 0.27s; }
+    .card:nth-child(10) { animation-delay: 0.30s; }
+
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 0.45rem;
+    }
+
+    .card-title a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .card-title a:hover { color: var(--accent); }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+    }
+
+    .card-meta .source { color: var(--text-muted); }
+    .card-meta .sep    { color: var(--border-light); }
+
+    .unpin-btn {
+      margin-left: auto;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .unpin-btn:hover { color: var(--red); border-color: var(--red); }
+
+    .empty-state {
+      text-align: center;
+      padding: 6rem 2rem;
+      color: var(--text-dim);
+    }
+
+    .empty-state h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .empty-state p { font-size: 0.9rem; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      header { padding: 0.9rem 1rem; gap: 0.75rem; align-items: center; }
+      .page-title { font-size: 1.3rem; }
+      main { padding: 1rem; }
+      .back-btn { min-height: 44px; display: flex; align-items: center; }
+      .unpin-btn { min-height: 36px; }
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="back-btn">← Back</a>
+    <div class="page-title">📌 <span>Pinned</span></div>
+  </header>
+
+  <main>
+    {% if pinned %}
+      {% for item in pinned %}
+      <div class="card" id="card-{{ item.id }}">
+        <div class="card-category">{{ item.category }}</div>
+        <div class="card-title">
+          {% if item.url %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a>
+          {% else %}
+            {{ item.title }}
+          {% endif %}
+        </div>
+        <div class="card-meta">
+          <span class="source">{{ item.source }}</span>
+          {% if item.published_at %}
+          <span class="sep">·</span>
+          <span class="timestamp" data-utc="{{ item.published_at }}">{{ item.published_at }}</span>
+          {% endif %}
+          <button class="unpin-btn" onclick="unpin({{ item.id }}, this)">unpin</button>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">
+        <h2>Nothing pinned yet.</h2>
+        <p>Tap 📍 on any article in the dashboard to save it here.</p>
+      </div>
+    {% endif %}
+  </main>
+
+  <script>
+    document.querySelectorAll('.timestamp[data-utc]').forEach(el => {
+      try {
+        const d = new Date(el.dataset.utc);
+        el.textContent = d.toLocaleString('en-GB', {
+          timeZone: 'Europe/Amsterdam',
+          day: 'numeric', month: 'short',
+          hour: '2-digit', minute: '2-digit',
+        });
+      } catch {}
+    });
+
+    async function unpin(itemId, btn) {
+      try {
+        await fetch(`/pin/${itemId}`, { method: 'POST' });
+        const card = document.getElementById(`card-${itemId}`);
+        card.style.transition = 'opacity 0.25s';
+        card.style.opacity = '0';
+        setTimeout(() => {
+          card.remove();
+          if (!document.querySelector('.card')) window.location.reload();
+        }, 260);
+      } catch (e) {
+        console.error('Unpin failed:', e);
+      }
+    }
+  </script>
+</body>
+</html>

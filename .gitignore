@@ -1,0 +1,23 @@
+# Secrets and local OAuth credentials
+.env
+credentials.json
+token.json
+
+# Local application state
+news.db
+*.db-journal
+*.sqlite3
+
+# Python tooling
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.codex/
+DESIGN-IS-*/
+
+# Operating-system and editor files
+.DS_Store
+.idea/
+.vscode/
