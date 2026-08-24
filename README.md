@@ -2,7 +2,7 @@
 
 A private, locally hosted (fully vibe-coded) news dashboard that brings RSS feeds, selected X accounts through Nitter, and a Gmail newsletter into one editorial interface. Its built-in assistant answers questions using the current day's headlines as context.
 
-This repository is intended as a portfolio project. It is not a hosted product and does not collect telemetry.
+This repository is intended as a personal project to aggregate news for myself. It is not a hosted product and does not collect telemetry.
 
 ![Dashboard screenshot](docs/images/dashboard-screenshot.png)
 
