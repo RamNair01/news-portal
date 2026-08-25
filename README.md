@@ -29,7 +29,7 @@ Add `OPENAI_API_KEY` to `.env` to enable the News Assistant. The dashboard runs 
 
 ## Gmail setup
 
-Gmail is optional. To enable the newsletter source, create an OAuth desktop-client credential in Google Cloud, save it as `credentials.json` in the repository root, and trigger a refresh. The browser consent flow creates `token.json` after approval.
+Gmail is optional, but I use it because I am subscribed to several newsletters. To enable the newsletter source, create an OAuth desktop-client credential in Google Cloud, save it as `credentials.json` in the repository root, and trigger a refresh. The browser consent flow creates `token.json` after approval.
 
 The application requests only `https://www.googleapis.com/auth/gmail.readonly`. Neither OAuth file is committed to Git.
 
